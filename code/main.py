@@ -61,7 +61,7 @@ if __name__ == '__main__':
 			C = C * 10/9
 	percentiles = (10, 15, 20, 25, 30, 35, 40, 50, 60, 80, 100)
 	exps = Experiments()
-	#exps.runFeatureSelection(percentiles)
+	exps.runFeatureSelection(percentiles)
 	exps.runParameterTuning(Clist, 20)
 
 
