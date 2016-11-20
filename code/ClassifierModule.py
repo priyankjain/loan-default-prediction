@@ -5,7 +5,7 @@
 from sklearn.pipeline import Pipeline
 from CrossValidationModule import crossValidate
 
-def classify(normalizer, featureSelector, model, K, percentile, X, y):
+def classify(normalizer, featureSelector, model, percentile, X, y):
 	'''Calculates accuracy by running the pipeling for top K features
 	Parameters: normalizer: Normalizer to use from sklearn.preprocessing
 	featureSelector: Feature selector to use from sklearn.feature_selection
@@ -19,4 +19,4 @@ def classify(normalizer, featureSelector, model, K, percentile, X, y):
 	'''
 	clf = Pipeline([('featureSelector', featureSelector), ('normalizer', normalizer) , ('model', model)])
 	clf.set_params(featureSelector__percentile=percentile)
-	return crossValidate(clf, X, y, K)
+	return crossValidate(clf, X, y)

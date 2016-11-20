@@ -46,9 +46,9 @@ class Filter(object):
 					continue
 				if k == self.labelColumn:
 					if v == '0':
-						v = 0
-					else:
 						v = 1
+					else:
+						v = -1
 				outputRow.append(v)
 			writer.writerow(outputRow)
 		fin.close()

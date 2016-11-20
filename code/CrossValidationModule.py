@@ -5,7 +5,7 @@
 
 import numpy as np
 
-def crossValidate(classifier, X, y, K=5):
+def crossValidate(classifier, X_train, y_train, X_test, y_test):
 	'''Performs cross validation for the given classifier and training set
 	Uses simple K fold cross validation
 	Parameters: classifier (type: sklearn classifier object):\
@@ -15,16 +15,14 @@ def crossValidate(classifier, X, y, K=5):
 	Returns: (mean, std): Mean and standard deviation of accuracies
 	over the K classifiers
 	'''
-	accuracies = list()
-	for k in range(0, K):
-		X_train = [x for i, x in enumerate(X) if i%K != k]
-		X_test = [x for i, x in enumerate(X) if i%K == k]
-		y_train = [z for i,z in enumerate(y) if i%K != k]
-		y_test = [z for i,z in enumerate(y) if i%K == k]
-		classifier.fit(X_train, y_train)
-		y_predicted = classifier.predict(X_test)
-		num_wrong_predictions = sum([abs(a-b) for a, b in zip(y_test, y_predicted)])
-		total_predictions = len(y_test)
-		accuracies.append((total_predictions-num_wrong_predictions)/total_predictions)
-	accuracies = np.array(accuracies)
-	return (accuracies.mean(), accuracies.std())
+	classifier.fit(X_train, y_train)
+	y_predicted = classifier.predict(X_test)
+	y_test = [x[0] for x in y_test]
+	print(y_train)
+	print(y_predicted)
+	print(y_test)
+	num_wrong_predictions = sum([1 if a != b else 0 for a, b in zip(y_test, y_predicted) ])
+	total_predictions = len(y_test)
+	accuracy = total_predictions-num_wrong_predictions
+	accuracy /= total_predictions
+	return accuracy
