@@ -17,7 +17,7 @@ class DataReader(object):
 		'''
 		self._dataFile = os.path.join(dataFolder, dataFileName)
 		self._allData = None
-		self._testDataFile = testDataFileName
+		self._testDataFile = os.path.join(dataFolder, testDataFileName)
 
 	def getTrainData(self, nSamples, percentNeg):
 		'''Parameters: nSamples(int): Number of samples to be read in
@@ -90,18 +90,20 @@ class DataReader(object):
 		Parameters: nSamples (int): Number of test samples to read in
 		Return: X_test, y_test
 		'''
+		self.X_test = list()
+		self.y_test = list()
 		with open(self._testDataFile, 'r') as fin:
 			reader = csv.reader(fin)
-			count = 0			
+			count = 1
 			for row in reader:
-				if count == 0:
-					count = 1
-					continue
-				record = [float(x) for x in row]
-				self.X_test.append([record[:-1]])
-				self.y_test.append([record[-1]])
 				count += 1
+				record = [float(x) for x in row]
+				self.X_test.append(record[:-1])
+				self.y_test.append(record[-1])
 				if count>nSamples:
 					break
+		self.X_test = np.array(self.X_test)
+		self.y_test = np.array(self.y_test)
 		print('Read in {} testing samples from {}'
 				.format(nSamples, self._testDataFile))
+		return self.X_test, self.y_test
