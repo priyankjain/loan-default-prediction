@@ -28,7 +28,8 @@ def crossValidate(classifier, X_train, y_train, X_test, y_test, classifier_type)
 		y_probabilities = y_probabilities[:,1]
 	elif classifier_type == 'One-Class-SVM':
 		y_probabilities = classifier.decision_function(X_test)
-	y_test = [x[0] for x in y_test]
+	if any(isinstance(el, np.ndarray) for el in y_test):
+		y_test = [x[0] for x in y_test]
 	fpr, tpr, thresholds = roc_curve(y_test, y_probabilities,\
 		pos_label = 1)
 	roc_auc = auc(fpr, tpr)

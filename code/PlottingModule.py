@@ -26,3 +26,14 @@ def plotAndSaveLineChart(title, x_data, y_data, xlabel, ylabel):
 	plt.clf()
 	plt.cla()
 	plt.close()
+
+def drawBiasVarianceCurve(title, x_data, y1_data, y2_data, xlabel, y1label, y2label):
+	plt.figure()
+	plt.title(title)
+	plt.plot(x_data, y1_data, 'o-', color='r', label=y1label)
+	plt.plot(x_data, y2_data, 'o-', color='g', label=y2label)
+	plt.legend(loc='best')
+	plt.savefig('title.pdf')
+	plt.clf()
+	plt.cla()
+	plt.close()
