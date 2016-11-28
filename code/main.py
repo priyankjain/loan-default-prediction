@@ -45,7 +45,7 @@ class Experiments(object):
 			self.model = svm.OneClassSVM
 		elif self.classifierType == 'Gradient-Boosting':
 			self.model = ensemble.GradientBoostingClassifier
-		self.X_test, self.y_test = self.dataSource.getTestData(5000)
+		self.X_test, self.y_test = self.dataSource.getTestData(1000)
 		self.X_test = self.normalizer.transform(self.X_test)
 
 	def trainAndTest(self, kernel, percentile, C, gamma, X_train, y_train, X_test, y_test):
@@ -217,9 +217,9 @@ class Experiments(object):
 if __name__ == '__main__':
 	os.chdir(HOME_FOLDER)
 	C_range = np.logspace(-2, 1.5, 8)
-	percentiles_range = (10, 15, 20, 25, 30, 35, 40, 50, 60, 80, 100)
+	percentiles_range = (10, 15, 20, 25, 30, 35, 40)
 	kernels_range = ['linear', 'poly', 'rbf', 'sigmoid']
-	gamma_range = np.logspace(-9, 1, 10)
+	gamma_range = np.logspace(-9, 0, 10)
 	binarySVMexps = Experiments('Binary-SVM', percentiles_range, kernels_range, gamma_range, C_range)
 	binarySVMexps.runGridSearch()
 	binarySVMexps.runTests()
