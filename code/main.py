@@ -26,12 +26,11 @@ class Experiments(object):
 		self.dataSource = DataReader(DATA_FOLDER, CLEAN_TRAINING_FILE, CLEAN_TESTING_FILE)
 		self.classifierType = classifierType
 		if self.classifierType == 'Binary-SVM' or self.classifierType == 'Gradient-Boosting':
-			self.X_train, self.y_train, self.X_cv, self.y_cv = self.dataSource.getTrainData(5000, 50)
+			self.X_train, self.y_train = self.dataSource.getTrainData(5000, 50)
 		elif self.classifierType == 'One-Class-SVM':
-			self.X_train, self.y_train, self.X_cv, self.y_cv = self.dataSource.getTrainData(5000, 0)
+			self.X_train, self.y_train = self.dataSource.getTrainData(5000, 0)
 		standardNormalizer = preprocessing.StandardScaler()
 		self.X_train = standardNormalizer.fit_transform(self.X_train)
-		self.X_cv = standardNormalizer.transform(self.X_cv)
 		mi_featureSelector = feature_selection.mutual_info_classif
 		self.normalizer = standardNormalizer
 		self.featureSelector = mi_featureSelector
@@ -41,34 +40,132 @@ class Experiments(object):
 		self.C_range = C_range
 		if self.classifierType == 'Binary-SVM':
 			self.model = svm.SVC
+			self.defaultKernel = 'rbf'
+			self.defaultGamma = 'auto'
+			self.defaultC = 1
 		elif self.classifierType == 'One-Class-SVM':
 			self.model = svm.OneClassSVM
+			self.defaultKernel = 'rbf'
+			self.defaultGamma = 'auto'
+			self.defaultC = 0.5
 		elif self.classifierType == 'Gradient-Boosting':
 			self.model = ensemble.GradientBoostingClassifier
+			self.defaultKernel = 100
+			self.defaultGamma = 3
+			self.defaultC = 0.1
 		self.X_test, self.y_test = self.dataSource.getTestData(1000)
 		self.X_test = self.normalizer.transform(self.X_test)
+		self.K = 5
+		self.bestPercentile = None
+		self.bestKernel = None
+		self.bestGamma = None
+		self.bestC = None
 
-	def trainAndTest(self, kernel, percentile, C, gamma, X_train, y_train, X_test, y_test):
-		classifier = None
-		accuracy = None
-		roc_auc = None
+	def trainAndTest(self, kernel, percentile, C, gamma):
 		print("Processing Kernel: {}, percentile: {}, C: {}, gamma: {}".format(\
 								kernel, percentile, C, gamma))
+		fselector = feature_selection.SelectPercentile(self.featureSelector,\
+								percentile)
+		X_train = fselector.fit_transform(self.X_train, self.y_train)
 		if self.classifierType == 'Binary-SVM':
-			classifier, accuracy, roc_auc = crossValidate(self.model(kernel=kernel, C=C, \
-				probability=True, gamma=gamma),\
-				X_train, y_train, X_test, y_test, self.classifierType)
+			mean, std = crossValidate(self.model(kernel=kernel, C=C, \
+				gamma=gamma),\
+				X_train, self.y_train, self.K)
 		elif self.classifierType == 'One-Class-SVM':
-			classifier, accuracy,roc_auc = crossValidate(self.model(kernel=kernel, nu=C, \
-				probability=True, gamma=gamma),\
-				X_train, y_train, X_test, y_test, self.classifierType)
+			mean, std = crossValidate(self.model(kernel=kernel, nu=C, \
+				gamma=gamma),\
+				X_train, self.y_train)
 		elif self.classifierType == 'Gradient-Boosting':
-			classifier, accuracy, roc_auc = crossValidate(self.model(n_estimators = kernel,\
+			mean, std = crossValidate(self.model(n_estimators = kernel,\
 				max_depth = gamma, learning_rate=C), \
-				X_train, y_train, X_test, y_test, self.classifierType)
-		print("Kernel: {}, percentile: {}, C: {}, gamma: {}, accuracy: {}, roc_auc: {}".format(\
-								kernel, percentile, C, gamma, accuracy, roc_auc))
-		return classifier, accuracy, roc_auc
+				X_train, self.y_train)
+		print("Kernel: {}, percentile: {}, C: {}, gamma: {}, mean-accuracy: {}, std-accuracy: {}".format(\
+								kernel, percentile, C, gamma, mean, std))
+		return mean, std
+
+	def selectBestPercentile(self, kernel=None, C=None, gamma=None):
+		means = list()
+		stds = list()
+		if kernel is None:
+			kernel = self.defaultKernel
+		if C is None:
+			C = self.defaultC
+		if gamma is None:
+			gamma = self.defaultGamma
+		bestMean = None
+		for percentile in self.percentiles_range:
+			mean, std = self.trainAndTest(kernel, percentile, \
+				C, gamma)
+			mean = round(mean, 2)
+			means.append(mean)
+			stds.append(std)
+			if bestMean is None or mean > bestMean:
+				bestMean = mean
+				self.bestPercentile = percentile
+		plotter.plotAndSaveErrorBar('Percentile validation curve for {}'.format(self.classifierType), \
+			self.percentiles_range, means, stds, 'Percentile', 'Accuracy')
+
+	def selectBestKernel(self, percentile, C=None, gamma=None):
+		means = list()
+		stds = list()
+		if C is None:
+			C = self.defaultC
+		if gamma is None:
+			gamma = self.defaultGamma
+		bestMean = None
+		for kernel in self.kernels_range:
+			mean, std = self.trainAndTest(kernel, percentile, \
+				C, gamma)	
+			mean = round(mean, 2)
+			means.append(mean)
+			stds.append(std)
+			if bestMean is None or mean > bestMean:
+				bestMean = mean
+				self.bestKernel = kernel
+		plotter.plotAndSaveErrorBar('Kernel validation curve for {}'.format(self.classifierType), \
+			range(0, len(self.kernels_range)), means, stds, 'Kernel ({})'.\
+			format({k:v for k, v in zip(range(0, len(self.kernels_range)), self.kernels_range)}), 'Accuracy')
+
+	def selectBestGamma(self, percentile, kernel, C=None):
+		means = list()
+		stds = list()
+		if C is None:
+			C = self.defaultC
+		bestMean = None
+		for gamma in self.gamma_range:
+			mean, std = self.trainAndTest(kernel, percentile, \
+				C, gamma)
+			mean = round(mean, 2)
+			means.append(mean)
+			stds.append(std)
+			if bestMean is None or mean > bestMean:
+				bestMean = mean
+				self.bestGamma = gamma
+		plotter.plotAndSaveErrorBar('Gamma validation curve for {}'.format(self.classifierType), \
+			self.gamma_range, means, stds, 'Gamma', 'Accuracy')
+
+	def selectBestC(self, percentile, kernel, gamma):
+		means = list()
+		stds = list()
+		bestMean = None
+		for C in self.C_range:
+			mean, std = self.trainAndTest(kernel, percentile, \
+				C, gamma)
+			mean = round(mean, 2)
+			means.append(mean)
+			stds.append(std)
+			if bestMean is None or mean > bestMean:
+				bestMean = mean
+				self.bestC = C
+		plotter.plotAndSaveErrorBar('Regularization parameter validation curve for {}'.format(self.classifierType),\
+			self.C_range, means, stds, 'C', 'Accuracy')
+
+	def runGreedySearch(self):
+		self.selectBestPercentile()
+		self.selectBestKernel(self.bestPercentile)
+		self.selectBestGamma(self.bestPercentile, self.bestKernel)
+		self.selectBestC(self.bestPercentile, self.bestKernel, self.bestGamma)
+
 
 	def runGridSearch(self):
 		CVresults = list()
@@ -217,24 +314,25 @@ class Experiments(object):
 if __name__ == '__main__':
 	os.chdir(HOME_FOLDER)
 	C_range = np.logspace(-2, 1.5, 8)
-	percentiles_range = (10, 15, 20, 25, 30, 35, 40)
+	percentiles_range = (10, 15, 20, 25, 30, 35, 40, 50, 60, 70, 80, 100)
 	kernels_range = ['linear', 'poly', 'rbf', 'sigmoid']
-	gamma_range = np.logspace(-9, 0, 10)
+	gamma_range = np.logspace(-9, -1, 10)
 	binarySVMexps = Experiments('Binary-SVM', percentiles_range, kernels_range, gamma_range, C_range)
-	binarySVMexps.runGridSearch()
-	binarySVMexps.runTests()
-	binarySVMexps.plotCurves()
-	nu_range = np.arange(0.01, 1.00, 0.1)
+	#binarySVMexps.runGridSearch()
+	binarySVMexps.runGreedySearch()
+	#binarySVMexps.runTests()
+	#binarySVMexps.plotCurves()
+	nu_range = np.arange(0.05, 1.00, 0.1)
 	oneClassSVMexps = Experiments('One-Class-SVM', percentiles_range, kernels_range, gamma_range, nu_range)
-	oneClassSVMexps.runGridSearch()
-	oneClassSVMexps.runTests()
-	oneClassSVMexps.plotCurves()
+	oneClassSVMexps.runGreedySearch()
+	#oneClassSVMexps.runTests()
+	#oneClassSVMexps.plotCurves()
 	learning_range = np.arange(0.1, 1, 0.1)
 	estimators_range = np.arange(100, 200, 10)
 	depth_range = np.arange(1, 5, 1)
 	gradientBoostingexps = Experiments('Gradient-Boosting', percentiles_range, estimators_range, \
 		depth_range, learning_range)
-	gradientBoostingexps.runGridSearch()
-	gradientBoostingexps.runTests()
-	gradientBoostingexps.plotCurves()
+	gradientBoostingexps.runGreedySearch()
+	#gradientBoostingexps.runTests()
+	#gradientBoostingexps.plotCurves()
 

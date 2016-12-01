@@ -28,17 +28,16 @@ class DataReader(object):
 		'''
 		nNeg = math.ceil(nSamples*percentNeg/100)
 		nPos = nSamples - nNeg
-		nTest = nSamples*0.3
 		if self._allData is None:
-			self._readData(nPos, nNeg, nTest)
+			self._readData(nPos, nNeg)
 			if self._rows < nSamples:
 				raise ValueError('Requested {} samples from DataGenerator'.\
 				format(nSamples) + 'but data only has {} samples'.format(self._rows))
 			self.X = self._allData[:, 0:self._cols - 1]
 			self.y = self._allData[:, - 1]
-		return (self.X, self.y, self.X_cv, self.y_cv)
+		return (self.X, self.y)
 
-	def _readData(self, nPos, nNeg, nCV):
+	def _readData(self, nPos, nNeg):
 		'''Reads data from the actual file, with required number of 
 		positive and negative samples. Better than using np.loadtxt
 		which loads the entire file
@@ -47,14 +46,11 @@ class DataReader(object):
 		Return: None
 		'''
 		self._allData = list()
-		self.X_cv = list()
-		self.y_cv = list()
 		with open(self._dataFile, 'r') as fin:
 				reader = csv.reader(fin)
 				count = 0
 				posCount = 0
 				negCount = 0
-				testCount = 0
 				for row in reader:
 					if count == 0:
 						count = 1
@@ -68,22 +64,12 @@ class DataReader(object):
 						if negCount <= nNeg:
 							self._allData.append([float(x) for x in row])
 					if posCount > nPos and negCount > nNeg:
-						if testCount >= nCV:
-							break
-						else:
-							self.X_cv.append([float(x) for x in row[:-1]])
-							if row[-1] == '-1':
-								self.y_cv.append([-1])
-							elif row[-1] == '1':
-								self.y_cv.append([1])
-							testCount += 1
+						break
 		self._allData = np.array(self._allData)
-		self.X_cv = np.array(self.X_cv)
-		self.y_cv = np.array(self.y_cv)
-		np.random.shuffle(self._allData)
+		#np.random.shuffle(self._allData)
 		(self._rows, self._cols) = self._allData.shape
-		print('Read in {} training samples ({} positive and {} negative) and {} cross-validation samples from {}: '
-				.format(self._rows, nPos, nNeg, nCV, self._dataFile))
+		print('Read in {} training samples ({} positive and {} negative) from {}'
+				.format(self._rows, nPos, nNeg, self._dataFile))
 
 	def getTestData(self, nSamples):
 		'''Reads data from the testing file

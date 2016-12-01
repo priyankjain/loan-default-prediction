@@ -1,0 +1,217 @@
+Read in 5000 training samples (2500 positive and 2500 negative) from data/train_v2_clean.csv
+Read in 1000 testing samples from data/test_v2_clean.csv
+Processing Kernel: rbf, percentile: 10, C: 1, gamma: auto
+Kernel: rbf, percentile: 10, C: 1, gamma: auto, mean-accuracy: 0.6006, std-accuracy: 0.012175385004179551
+Processing Kernel: rbf, percentile: 15, C: 1, gamma: auto
+Kernel: rbf, percentile: 15, C: 1, gamma: auto, mean-accuracy: 0.6056, std-accuracy: 0.011038115781237314
+Processing Kernel: rbf, percentile: 20, C: 1, gamma: auto
+Kernel: rbf, percentile: 20, C: 1, gamma: auto, mean-accuracy: 0.6052, std-accuracy: 0.011232096865679187
+Processing Kernel: rbf, percentile: 25, C: 1, gamma: auto
+Kernel: rbf, percentile: 25, C: 1, gamma: auto, mean-accuracy: 0.6146, std-accuracy: 0.015793669617919722
+Processing Kernel: rbf, percentile: 30, C: 1, gamma: auto
+Kernel: rbf, percentile: 30, C: 1, gamma: auto, mean-accuracy: 0.6634, std-accuracy: 0.005238320341483522
+Processing Kernel: rbf, percentile: 35, C: 1, gamma: auto
+Kernel: rbf, percentile: 35, C: 1, gamma: auto, mean-accuracy: 0.6841999999999999, std-accuracy: 0.012319090875547554
+Processing Kernel: rbf, percentile: 40, C: 1, gamma: auto
+Kernel: rbf, percentile: 40, C: 1, gamma: auto, mean-accuracy: 0.6841999999999999, std-accuracy: 0.009887365675446583
+Processing Kernel: rbf, percentile: 50, C: 1, gamma: auto
+Kernel: rbf, percentile: 50, C: 1, gamma: auto, mean-accuracy: 0.6863999999999999, std-accuracy: 0.012908911650483907
+Processing Kernel: rbf, percentile: 60, C: 1, gamma: auto
+Kernel: rbf, percentile: 60, C: 1, gamma: auto, mean-accuracy: 0.6941999999999999, std-accuracy: 0.0114087685575613
+Processing Kernel: rbf, percentile: 70, C: 1, gamma: auto
+Kernel: rbf, percentile: 70, C: 1, gamma: auto, mean-accuracy: 0.692, std-accuracy: 0.008461678320522437
+Processing Kernel: rbf, percentile: 80, C: 1, gamma: auto
+Kernel: rbf, percentile: 80, C: 1, gamma: auto, mean-accuracy: 0.6946, std-accuracy: 0.009090654541890784
+Processing Kernel: rbf, percentile: 100, C: 1, gamma: auto
+Kernel: rbf, percentile: 100, C: 1, gamma: auto, mean-accuracy: 0.6937999999999999, std-accuracy: 0.003815756805667786
+Processing Kernel: linear, percentile: 50, C: 1, gamma: auto
+Kernel: linear, percentile: 50, C: 1, gamma: auto, mean-accuracy: 0.7107999999999999, std-accuracy: 0.011754148203932103
+Processing Kernel: poly, percentile: 50, C: 1, gamma: auto
+Kernel: poly, percentile: 50, C: 1, gamma: auto, mean-accuracy: 0.6607999999999999, std-accuracy: 0.004166533331199936
+Processing Kernel: rbf, percentile: 50, C: 1, gamma: auto
+Kernel: rbf, percentile: 50, C: 1, gamma: auto, mean-accuracy: 0.6916, std-accuracy: 0.01134195750300622
+Processing Kernel: sigmoid, percentile: 50, C: 1, gamma: auto
+Kernel: sigmoid, percentile: 50, C: 1, gamma: auto, mean-accuracy: 0.554, std-accuracy: 0.020562101059959786
+Processing Kernel: linear, percentile: 50, C: 1, gamma: 1e-09
+Kernel: linear, percentile: 50, C: 1, gamma: 1e-09, mean-accuracy: 0.7089999999999999, std-accuracy: 0.005176871642217918
+Processing Kernel: linear, percentile: 50, C: 1, gamma: 7.742636826811278e-09
+Kernel: linear, percentile: 50, C: 1, gamma: 7.742636826811278e-09, mean-accuracy: 0.7081999999999999, std-accuracy: 0.004621688003316541
+Processing Kernel: linear, percentile: 50, C: 1, gamma: 5.99484250318941e-08
+Kernel: linear, percentile: 50, C: 1, gamma: 5.99484250318941e-08, mean-accuracy: 0.7028, std-accuracy: 0.003487119154832542
+Processing Kernel: linear, percentile: 50, C: 1, gamma: 4.6415888336127725e-07
+Kernel: linear, percentile: 50, C: 1, gamma: 4.6415888336127725e-07, mean-accuracy: 0.7142, std-accuracy: 0.0024000000000000024
+Processing Kernel: linear, percentile: 50, C: 1, gamma: 3.5938136638046257e-06
+Kernel: linear, percentile: 50, C: 1, gamma: 3.5938136638046257e-06, mean-accuracy: 0.7139999999999999, std-accuracy: 0.006356099432828288
+Processing Kernel: linear, percentile: 50, C: 1, gamma: 2.782559402207126e-05
+Kernel: linear, percentile: 50, C: 1, gamma: 2.782559402207126e-05, mean-accuracy: 0.6954, std-accuracy: 0.008064738061462356
+Processing Kernel: linear, percentile: 50, C: 1, gamma: 0.00021544346900318823
+Kernel: linear, percentile: 50, C: 1, gamma: 0.00021544346900318823, mean-accuracy: 0.7017999999999999, std-accuracy: 0.006013318551349169
+Processing Kernel: linear, percentile: 50, C: 1, gamma: 0.0016681005372000558
+Kernel: linear, percentile: 50, C: 1, gamma: 0.0016681005372000558, mean-accuracy: 0.7116, std-accuracy: 0.010836973747315263
+Processing Kernel: linear, percentile: 50, C: 1, gamma: 0.012915496650148827
+Kernel: linear, percentile: 50, C: 1, gamma: 0.012915496650148827, mean-accuracy: 0.7, std-accuracy: 0.007899367063252607
+Processing Kernel: linear, percentile: 50, C: 1, gamma: 0.1
+Kernel: linear, percentile: 50, C: 1, gamma: 0.1, mean-accuracy: 0.7121999999999999, std-accuracy: 0.013212115651931007
+Processing Kernel: linear, percentile: 50, C: 0.01, gamma: 1e-09
+Kernel: linear, percentile: 50, C: 0.01, gamma: 1e-09, mean-accuracy: 0.6943999999999999, std-accuracy: 0.005314132102234574
+Processing Kernel: linear, percentile: 50, C: 0.03162277660168379, gamma: 1e-09
+Kernel: linear, percentile: 50, C: 0.03162277660168379, gamma: 1e-09, mean-accuracy: 0.6908, std-accuracy: 0.0031874754901018076
+Processing Kernel: linear, percentile: 50, C: 0.1, gamma: 1e-09
+Kernel: linear, percentile: 50, C: 0.1, gamma: 1e-09, mean-accuracy: 0.695, std-accuracy: 0.004816637831516885
+Processing Kernel: linear, percentile: 50, C: 0.31622776601683794, gamma: 1e-09
+Kernel: linear, percentile: 50, C: 0.31622776601683794, gamma: 1e-09, mean-accuracy: 0.6925999999999999, std-accuracy: 0.007838367176906141
+Processing Kernel: linear, percentile: 50, C: 1.0, gamma: 1e-09
+Kernel: linear, percentile: 50, C: 1.0, gamma: 1e-09, mean-accuracy: 0.6998, std-accuracy: 0.005035871324805673
+Processing Kernel: linear, percentile: 50, C: 3.1622776601683795, gamma: 1e-09
+Kernel: linear, percentile: 50, C: 3.1622776601683795, gamma: 1e-09, mean-accuracy: 0.7139999999999999, std-accuracy: 0.007874007874011818
+Processing Kernel: linear, percentile: 50, C: 10.0, gamma: 1e-09
+Kernel: linear, percentile: 50, C: 10.0, gamma: 1e-09, mean-accuracy: 0.7045999999999999, std-accuracy: 0.007838367176906176
+Processing Kernel: linear, percentile: 50, C: 31.622776601683793, gamma: 1e-09
+
+Kernel: linear, percentile: 50, C: 31.622776601683793, gamma: 1e-09, mean-accuracy: 0.7146, std-accuracy: 0.012403225386970935
+Read in 5000 training samples (5000 positive and 0 negative) from data/train_v2_clean.csv
+Read in 1000 testing samples from data/test_v2_clean.csv
+Processing Kernel: rbf, percentile: 10, C: 0.5, gamma: auto
+Kernel: rbf, percentile: 10, C: 0.5, gamma: auto, mean-accuracy: 0.4992000000000001, std-accuracy: 0.01979292802998081
+Processing Kernel: rbf, percentile: 15, C: 0.5, gamma: auto
+Kernel: rbf, percentile: 15, C: 0.5, gamma: auto, mean-accuracy: 0.4974, std-accuracy: 0.02086719914123601
+Processing Kernel: rbf, percentile: 20, C: 0.5, gamma: auto
+Kernel: rbf, percentile: 20, C: 0.5, gamma: auto, mean-accuracy: 0.49960000000000004, std-accuracy: 0.023627103080995793
+Processing Kernel: rbf, percentile: 25, C: 0.5, gamma: auto
+Kernel: rbf, percentile: 25, C: 0.5, gamma: auto, mean-accuracy: 0.4992, std-accuracy: 0.020884443971530598
+Processing Kernel: rbf, percentile: 30, C: 0.5, gamma: auto
+Kernel: rbf, percentile: 30, C: 0.5, gamma: auto, mean-accuracy: 0.4998, std-accuracy: 0.020721003836687082
+Processing Kernel: rbf, percentile: 35, C: 0.5, gamma: auto
+Kernel: rbf, percentile: 35, C: 0.5, gamma: auto, mean-accuracy: 0.4984, std-accuracy: 0.013108775686539164
+Processing Kernel: rbf, percentile: 40, C: 0.5, gamma: auto
+Kernel: rbf, percentile: 40, C: 0.5, gamma: auto, mean-accuracy: 0.49860000000000004, std-accuracy: 0.018510537539466555
+Processing Kernel: rbf, percentile: 50, C: 0.5, gamma: auto
+Kernel: rbf, percentile: 50, C: 0.5, gamma: auto, mean-accuracy: 0.499, std-accuracy: 0.014953260514015009
+Processing Kernel: rbf, percentile: 60, C: 0.5, gamma: auto
+Kernel: rbf, percentile: 60, C: 0.5, gamma: auto, mean-accuracy: 0.4968, std-accuracy: 0.02599538420566237
+Processing Kernel: rbf, percentile: 70, C: 0.5, gamma: auto
+Kernel: rbf, percentile: 70, C: 0.5, gamma: auto, mean-accuracy: 0.4981999999999999, std-accuracy: 0.013120975573485391
+Processing Kernel: rbf, percentile: 80, C: 0.5, gamma: auto
+Kernel: rbf, percentile: 80, C: 0.5, gamma: auto, mean-accuracy: 0.4976, std-accuracy: 0.014249210504445513
+Processing Kernel: rbf, percentile: 100, C: 0.5, gamma: auto
+Kernel: rbf, percentile: 100, C: 0.5, gamma: auto, mean-accuracy: 0.49660000000000004, std-accuracy: 0.014636939570825604
+Processing Kernel: linear, percentile: 10, C: 0.5, gamma: auto
+Kernel: linear, percentile: 10, C: 0.5, gamma: auto, mean-accuracy: 0.39960000000000007, std-accuracy: 0.0966987073336557
+Processing Kernel: poly, percentile: 10, C: 0.5, gamma: auto
+Kernel: poly, percentile: 10, C: 0.5, gamma: auto, mean-accuracy: 0.4346, std-accuracy: 0.012737346662472537
+Processing Kernel: rbf, percentile: 10, C: 0.5, gamma: auto
+Kernel: rbf, percentile: 10, C: 0.5, gamma: auto, mean-accuracy: 0.49860000000000004, std-accuracy: 0.013499629624548976
+Processing Kernel: sigmoid, percentile: 10, C: 0.5, gamma: auto
+Kernel: sigmoid, percentile: 10, C: 0.5, gamma: auto, mean-accuracy: 0.5044000000000001, std-accuracy: 0.02100095235935744
+Processing Kernel: rbf, percentile: 10, C: 0.5, gamma: 1e-09
+Kernel: rbf, percentile: 10, C: 0.5, gamma: 1e-09, mean-accuracy: 0.9826, std-accuracy: 0.00402988833592198
+Processing Kernel: rbf, percentile: 10, C: 0.5, gamma: 7.742636826811278e-09
+Kernel: rbf, percentile: 10, C: 0.5, gamma: 7.742636826811278e-09, mean-accuracy: 0.49879999999999997, std-accuracy: 0.009019977827023754
+Processing Kernel: rbf, percentile: 10, C: 0.5, gamma: 5.99484250318941e-08
+Kernel: rbf, percentile: 10, C: 0.5, gamma: 5.99484250318941e-08, mean-accuracy: 0.4877999999999999, std-accuracy: 0.018840382161729115
+Processing Kernel: rbf, percentile: 10, C: 0.5, gamma: 4.6415888336127725e-07
+Kernel: rbf, percentile: 10, C: 0.5, gamma: 4.6415888336127725e-07, mean-accuracy: 0.499, std-accuracy: 0.016504544828622222
+Processing Kernel: rbf, percentile: 10, C: 0.5, gamma: 3.5938136638046257e-06
+Kernel: rbf, percentile: 10, C: 0.5, gamma: 3.5938136638046257e-06, mean-accuracy: 0.49939999999999996, std-accuracy: 0.016414627622946567
+Processing Kernel: rbf, percentile: 10, C: 0.5, gamma: 2.782559402207126e-05
+Kernel: rbf, percentile: 10, C: 0.5, gamma: 2.782559402207126e-05, mean-accuracy: 0.49879999999999997, std-accuracy: 0.019363883907935427
+Processing Kernel: rbf, percentile: 10, C: 0.5, gamma: 0.00021544346900318823
+Kernel: rbf, percentile: 10, C: 0.5, gamma: 0.00021544346900318823, mean-accuracy: 0.5000000000000001, std-accuracy: 0.016994116628998416
+Processing Kernel: rbf, percentile: 10, C: 0.5, gamma: 0.0016681005372000558
+Kernel: rbf, percentile: 10, C: 0.5, gamma: 0.0016681005372000558, mean-accuracy: 0.49779999999999996, std-accuracy: 0.017701977290687065
+Processing Kernel: rbf, percentile: 10, C: 0.5, gamma: 0.012915496650148827
+Kernel: rbf, percentile: 10, C: 0.5, gamma: 0.012915496650148827, mean-accuracy: 0.4998, std-accuracy: 0.01581644713581405
+Processing Kernel: rbf, percentile: 10, C: 0.5, gamma: 0.1
+Kernel: rbf, percentile: 10, C: 0.5, gamma: 0.1, mean-accuracy: 0.16019999999999998, std-accuracy: 0.01843257985199033
+Processing Kernel: rbf, percentile: 10, C: 0.05, gamma: 1e-09
+Kernel: rbf, percentile: 10, C: 0.05, gamma: 1e-09, mean-accuracy: 0.7150000000000001, std-accuracy: 0.027676705006196078
+Processing Kernel: rbf, percentile: 10, C: 0.15000000000000002, gamma: 1e-09
+Kernel: rbf, percentile: 10, C: 0.15000000000000002, gamma: 1e-09, mean-accuracy: 0.9219999999999999, std-accuracy: 0.11852932126693375
+Processing Kernel: rbf, percentile: 10, C: 0.25000000000000006, gamma: 1e-09
+Kernel: rbf, percentile: 10, C: 0.25000000000000006, gamma: 1e-09, mean-accuracy: 0.6178, std-accuracy: 0.03794944004856988
+Processing Kernel: rbf, percentile: 10, C: 0.35000000000000003, gamma: 1e-09
+Kernel: rbf, percentile: 10, C: 0.35000000000000003, gamma: 1e-09, mean-accuracy: 0.8518000000000001, std-accuracy: 0.06861311827923289
+Processing Kernel: rbf, percentile: 10, C: 0.45000000000000007, gamma: 1e-09
+Kernel: rbf, percentile: 10, C: 0.45000000000000007, gamma: 1e-09, mean-accuracy: 0.6880000000000001, std-accuracy: 0.14107161301977092
+Processing Kernel: rbf, percentile: 10, C: 0.5500000000000002, gamma: 1e-09
+Kernel: rbf, percentile: 10, C: 0.5500000000000002, gamma: 1e-09, mean-accuracy: 0.2536, std-accuracy: 0.07704699864368501
+Processing Kernel: rbf, percentile: 10, C: 0.6500000000000001, gamma: 1e-09
+Kernel: rbf, percentile: 10, C: 0.6500000000000001, gamma: 1e-09, mean-accuracy: 0.7794, std-accuracy: 0.03632960225491052
+Processing Kernel: rbf, percentile: 10, C: 0.7500000000000002, gamma: 1e-09
+Kernel: rbf, percentile: 10, C: 0.7500000000000002, gamma: 1e-09, mean-accuracy: 0.6104, std-accuracy: 0.1278148661150181
+Processing Kernel: rbf, percentile: 10, C: 0.8500000000000002, gamma: 1e-09
+Kernel: rbf, percentile: 10, C: 0.8500000000000002, gamma: 1e-09, mean-accuracy: 0.6674, std-accuracy: 0.10551701284627041
+Processing Kernel: rbf, percentile: 10, C: 0.9500000000000002, gamma: 1e-09
+Kernel: rbf, percentile: 10, C: 0.9500000000000002, gamma: 1e-09, mean-accuracy: 0.4572, std-accuracy: 0.012448293055676343
+Read in 5000 training samples (2500 positive and 2500 negative) from data/train_v2_clean.csv
+Read in 1000 testing samples from data/test_v2_clean.csv
+Processing Kernel: 100, percentile: 10, C: 0.1, gamma: 3
+Kernel: 100, percentile: 10, C: 0.1, gamma: 3, mean-accuracy: 0.7605999999999999, std-accuracy: 0.011359577456930352
+Processing Kernel: 100, percentile: 15, C: 0.1, gamma: 3
+Kernel: 100, percentile: 15, C: 0.1, gamma: 3, mean-accuracy: 0.7678, std-accuracy: 0.013526270735128744
+Processing Kernel: 100, percentile: 20, C: 0.1, gamma: 3
+Kernel: 100, percentile: 20, C: 0.1, gamma: 3, mean-accuracy: 0.776, std-accuracy: 0.013084341787036912
+Processing Kernel: 100, percentile: 25, C: 0.1, gamma: 3
+Kernel: 100, percentile: 25, C: 0.1, gamma: 3, mean-accuracy: 0.7704000000000001, std-accuracy: 0.008452218643646182
+Processing Kernel: 100, percentile: 30, C: 0.1, gamma: 3
+Kernel: 100, percentile: 30, C: 0.1, gamma: 3, mean-accuracy: 0.7739999999999999, std-accuracy: 0.004560701700396556
+Processing Kernel: 100, percentile: 35, C: 0.1, gamma: 3
+Kernel: 100, percentile: 35, C: 0.1, gamma: 3, mean-accuracy: 0.776, std-accuracy: 0.004335896677735764
+Processing Kernel: 100, percentile: 40, C: 0.1, gamma: 3
+Kernel: 100, percentile: 40, C: 0.1, gamma: 3, mean-accuracy: 0.7832000000000001, std-accuracy: 0.007807688518377261
+Processing Kernel: 100, percentile: 50, C: 0.1, gamma: 3
+Kernel: 100, percentile: 50, C: 0.1, gamma: 3, mean-accuracy: 0.7886000000000001, std-accuracy: 0.010442221985765299
+Processing Kernel: 100, percentile: 60, C: 0.1, gamma: 3
+Kernel: 100, percentile: 60, C: 0.1, gamma: 3, mean-accuracy: 0.7837999999999999, std-accuracy: 0.009064215354899737
+Processing Kernel: 100, percentile: 70, C: 0.1, gamma: 3
+Kernel: 100, percentile: 70, C: 0.1, gamma: 3, mean-accuracy: 0.7878000000000001, std-accuracy: 0.00271293199325011
+Processing Kernel: 100, percentile: 80, C: 0.1, gamma: 3
+Kernel: 100, percentile: 80, C: 0.1, gamma: 3, mean-accuracy: 0.7842, std-accuracy: 0.0030594117081556736
+Processing Kernel: 100, percentile: 100, C: 0.1, gamma: 3
+Kernel: 100, percentile: 100, C: 0.1, gamma: 3, mean-accuracy: 0.7849999999999999, std-accuracy: 0.005513619500836093
+Processing Kernel: 100, percentile: 50, C: 0.1, gamma: 3
+Kernel: 100, percentile: 50, C: 0.1, gamma: 3, mean-accuracy: 0.786, std-accuracy: 0.006387487769068531
+Processing Kernel: 110, percentile: 50, C: 0.1, gamma: 3
+Kernel: 110, percentile: 50, C: 0.1, gamma: 3, mean-accuracy: 0.7832000000000001, std-accuracy: 0.006462197768561411
+Processing Kernel: 120, percentile: 50, C: 0.1, gamma: 3
+Kernel: 120, percentile: 50, C: 0.1, gamma: 3, mean-accuracy: 0.7988, std-accuracy: 0.006554387843269582
+Processing Kernel: 130, percentile: 50, C: 0.1, gamma: 3
+Kernel: 130, percentile: 50, C: 0.1, gamma: 3, mean-accuracy: 0.7916000000000001, std-accuracy: 0.008593020423576342
+Processing Kernel: 140, percentile: 50, C: 0.1, gamma: 3
+Kernel: 140, percentile: 50, C: 0.1, gamma: 3, mean-accuracy: 0.793, std-accuracy: 0.004857983120596452
+Processing Kernel: 150, percentile: 50, C: 0.1, gamma: 3
+Kernel: 150, percentile: 50, C: 0.1, gamma: 3, mean-accuracy: 0.7984, std-accuracy: 0.0008000000000000007
+Processing Kernel: 160, percentile: 50, C: 0.1, gamma: 3
+Kernel: 160, percentile: 50, C: 0.1, gamma: 3, mean-accuracy: 0.8042, std-accuracy: 0.006209669878503973
+Processing Kernel: 170, percentile: 50, C: 0.1, gamma: 3
+Kernel: 170, percentile: 50, C: 0.1, gamma: 3, mean-accuracy: 0.8009999999999999, std-accuracy: 0.0067230945255886505
+Processing Kernel: 180, percentile: 50, C: 0.1, gamma: 3
+Kernel: 180, percentile: 50, C: 0.1, gamma: 3, mean-accuracy: 0.8068, std-accuracy: 0.0043999999999999725
+Processing Kernel: 190, percentile: 50, C: 0.1, gamma: 3
+Kernel: 190, percentile: 50, C: 0.1, gamma: 3, mean-accuracy: 0.8062000000000001, std-accuracy: 0.007467261881037757
+Processing Kernel: 180, percentile: 50, C: 0.1, gamma: 1
+Kernel: 180, percentile: 50, C: 0.1, gamma: 1, mean-accuracy: 0.7289999999999999, std-accuracy: 0.01200000000000001
+Processing Kernel: 180, percentile: 50, C: 0.1, gamma: 2
+Kernel: 180, percentile: 50, C: 0.1, gamma: 2, mean-accuracy: 0.78, std-accuracy: 0.007974960814950761
+Processing Kernel: 180, percentile: 50, C: 0.1, gamma: 3
+Kernel: 180, percentile: 50, C: 0.1, gamma: 3, mean-accuracy: 0.8006, std-accuracy: 0.006311893535223806
+Processing Kernel: 180, percentile: 50, C: 0.1, gamma: 4
+Kernel: 180, percentile: 50, C: 0.1, gamma: 4, mean-accuracy: 0.8206, std-accuracy: 0.003929376540877704
+Processing Kernel: 180, percentile: 50, C: 0.1, gamma: 4
+Kernel: 180, percentile: 50, C: 0.1, gamma: 4, mean-accuracy: 0.8196, std-accuracy: 0.006829348431585555
+Processing Kernel: 180, percentile: 50, C: 0.2, gamma: 4
+Kernel: 180, percentile: 50, C: 0.2, gamma: 4, mean-accuracy: 0.8346, std-accuracy: 0.0045869379764718905
+Processing Kernel: 180, percentile: 50, C: 0.30000000000000004, gamma: 4
+Kernel: 180, percentile: 50, C: 0.30000000000000004, gamma: 4, mean-accuracy: 0.8218, std-accuracy: 0.005741080037762934
+Processing Kernel: 180, percentile: 50, C: 0.4, gamma: 4
+Kernel: 180, percentile: 50, C: 0.4, gamma: 4, mean-accuracy: 0.8305999999999999, std-accuracy: 0.01063202708800162
+Processing Kernel: 180, percentile: 50, C: 0.5, gamma: 4
+Kernel: 180, percentile: 50, C: 0.5, gamma: 4, mean-accuracy: 0.8282, std-accuracy: 0.009703607576566572
+Processing Kernel: 180, percentile: 50, C: 0.6, gamma: 4
+Kernel: 180, percentile: 50, C: 0.6, gamma: 4, mean-accuracy: 0.8238, std-accuracy: 0.008423775875461082
+Processing Kernel: 180, percentile: 50, C: 0.7000000000000001, gamma: 4
+Kernel: 180, percentile: 50, C: 0.7000000000000001, gamma: 4, mean-accuracy: 0.82, std-accuracy: 0.008763560920082633
+Processing Kernel: 180, percentile: 50, C: 0.8, gamma: 4
+Kernel: 180, percentile: 50, C: 0.8, gamma: 4, mean-accuracy: 0.8112, std-accuracy: 0.004915282290977756
+Processing Kernel: 180, percentile: 50, C: 0.9, gamma: 4
+Kernel: 180, percentile: 50, C: 0.9, gamma: 4, mean-accuracy: 0.8119999999999999, std-accuracy: 0.006480740698407825
