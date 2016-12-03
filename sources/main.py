@@ -182,7 +182,7 @@ class Experiments(object):
 			y_probabilities = y_probabilities[:,1]	
 		elif self.classifierType == 'One-Class-SVM':
 			classifier = self.model(kernel=self.bestKernel, nu=self.bestC, \
-				probability=True, gamma=self.bestGamma)
+				gamma=self.bestGamma)
 			classifier.fit(X_train, self.y_train)
 			y_probabilities = classifier.decision_function(X_test)
 		elif self.classifierType == 'Gradient-Boosting':
@@ -207,7 +207,7 @@ class Experiments(object):
 		precision = true_positives/(true_positives+false_positives)
 		recall = true_positives/(true_positives+false_negatives)
 		f1_score = 2*precision*recall/(precision+recall)
-		with open(os.path.join(CHARTS_FOLDER, 'Test Results.csv'), 'w') as fout:
+		with open(os.path.join(CHARTS_FOLDER, 'Test Results {}.csv'.format(self.classifierType)), 'w') as fout:
 			fout = csv.writer(fout)
 			fout.writerow(['Best Features', self.bestPercentile])
 			fout.writerow(['Best Kernel', self.bestKernel])
@@ -243,7 +243,7 @@ class Experiments(object):
 					probability= True, gamma=self.bestGamma)
 			elif self.classifierType == 'One-Class-SVM':
 				classifier = self.model(kernel=self.bestKernel, nu=self.bestC, \
-					probability=True, gamma=self.bestGamma)
+					gamma=self.bestGamma)
 			elif self.classifierType == 'Gradient-Boosting':
 				classifier = self.model(n_estimators = self.bestKernel,\
 					max_depth = self.bestGamma, probability=True, learning_rate=self.bestC)
@@ -436,23 +436,13 @@ if __name__ == '__main__':
 	percentiles_range = (10, 15, 20, 25, 30, 35, 40, 50, 60, 70, 80, 100)
 	kernels_range = ['linear', 'poly', 'rbf', 'sigmoid']
 	gamma_range = np.logspace(-9, -1, 10)
-	C_range = np.logspace(-2, -1, 2)
-	percentiles_range = (10, 20)
-	gamma_range = np.logspace(-9, -6, 3)
-	kernels_range = ['rbf', 'sigmoid']
 	binarySVMexps = Experiments('Binary-SVM', percentiles_range, kernels_range, gamma_range, C_range)
-	#binarySVMexps.runGridSearch()
-	binarySVMexps.runGreedySearch()
-	binarySVMexps.testAndDrawCurves()
-	#binarySVMexps.runTests()
-	#binarySVMexps.plotCurves()
-	'''
+	#binarySVMexps.runGreedySearch()
+	#binarySVMexps.testAndDrawCurves()
 	nu_range = np.arange(0.05, 1.00, 0.1)
 	oneClassSVMexps = Experiments('One-Class-SVM', percentiles_range, kernels_range, gamma_range, nu_range)
 	oneClassSVMexps.runGreedySearch()
 	oneClassSVMexps.testAndDrawCurves()
-	#oneClassSVMexps.runTests()
-	#oneClassSVMexps.plotCurves()
 	learning_range = np.arange(0.1, 1, 0.1)
 	estimators_range = np.arange(100, 200, 10)
 	depth_range = np.arange(1, 5, 1)
@@ -460,6 +450,3 @@ if __name__ == '__main__':
 		depth_range, learning_range)
 	gradientBoostingexps.runGreedySearch()
 	gradientBoostingexps.testAndDrawCurves()
-	#gradientBoostingexps.runTests()
-	#gradientBoostingexps.plotCurves()
-	'''	
