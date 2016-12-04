@@ -187,7 +187,7 @@ class Experiments(object):
 			y_probabilities = classifier.decision_function(X_test)
 		elif self.classifierType == 'Gradient-Boosting':
 			classifier = self.model(n_estimators = self.bestKernel,\
-				max_depth = self.bestGamma, probability=True, learning_rate=self.bestC)
+				max_depth = self.bestGamma, learning_rate=self.bestC)
 			classifier.fit(X_train, self.y_train)
 			y_probabilities = classifier.predict_proba(X_test)
 			y_probabilities = y_probabilities[:,1]
@@ -226,7 +226,7 @@ class Experiments(object):
 			self.X_train, self.y_train = self.dataSource.getTrainData(20000, 50)
 		elif self.classifierType == 'One-Class-SVM':
 			self.X_train, self.y_train = self.dataSource.getTrainData(20000, 0)
-		trainSize_range = [10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 7000, 9000, 12000, 15000, 20000]
+		trainSize_range = [20, 50, 100, 200, 500, 1000, 2000, 5000, 7000, 9000, 12000, 15000, 20000]
 		training_accuracies = list()
 		testing_accuracies = list()
 		for trainSize in trainSize_range:
@@ -246,7 +246,8 @@ class Experiments(object):
 					gamma=self.bestGamma)
 			elif self.classifierType == 'Gradient-Boosting':
 				classifier = self.model(n_estimators = self.bestKernel,\
-					max_depth = self.bestGamma, probability=True, learning_rate=self.bestC)
+					max_depth = self.bestGamma, learning_rate=self.bestC)
+			X_train[np.isnan(X_train)] = np.median(X_train[~np.isnan(X_train)])
 			classifier.fit(X_train, y_train)
 			y_predicted = classifier.predict(X_train)
 			num_wrong_predictions = sum([1 if a != b else 0 for a, b in zip(y_train, y_predicted) ])
@@ -283,8 +284,8 @@ class Experiments(object):
 		plt.savefig('Bias-Variance.pdf')
 		'''
 		plotter.drawBiasVarianceCurve('Bias-Variance-Curve for {}'.format(self.classifierType),\
-			trainSize_range, training_accuracies, testing_accuracies, \
-			'Number of training examples', 'Training Error', 'Testing Error')
+			trainSize_range, [x*100 for x in training_accuracies], [x*100 for x in testing_accuracies], \
+			'Number of training examples', 'Training Score', 'Testing Score')
 
 	def runGridSearch(self):
 		CVresults = list()
@@ -427,7 +428,7 @@ class Experiments(object):
 		print(training_accuracies)
 		print(testing_accuracies)
 		plotter.drawBiasVarianceCurve('Bias-Variance-Curve for {}'.format(self.classifierType),\
-			trainSize_range, training_accuracies, testing_accuracies, \
+			trainSize_range, 1-training_accuracies, 1-testing_accuracies, \
 			'Number of training examples', 'Training Error', 'Testing Error')
 
 if __name__ == '__main__':
@@ -436,16 +437,16 @@ if __name__ == '__main__':
 	percentiles_range = (10, 15, 20, 25, 30, 35, 40, 50, 60, 70, 80, 100)
 	kernels_range = ['linear', 'poly', 'rbf', 'sigmoid']
 	gamma_range = np.logspace(-9, -1, 10)
-	binarySVMexps = Experiments('Binary-SVM', percentiles_range, kernels_range, gamma_range, C_range)
+	#binarySVMexps = Experiments('Binary-SVM', percentiles_range, kernels_range, gamma_range, C_range)
 	#binarySVMexps.runGreedySearch()
 	#binarySVMexps.testAndDrawCurves()
 	nu_range = np.arange(0.05, 1.00, 0.1)
-	oneClassSVMexps = Experiments('One-Class-SVM', percentiles_range, kernels_range, gamma_range, nu_range)
-	oneClassSVMexps.runGreedySearch()
-	oneClassSVMexps.testAndDrawCurves()
-	learning_range = np.arange(0.1, 1, 0.1)
-	estimators_range = np.arange(100, 200, 10)
-	depth_range = np.arange(1, 5, 1)
+	#oneClassSVMexps = Experiments('One-Class-SVM', percentiles_range, kernels_range, gamma_range, nu_range)
+	#oneClassSVMexps.runGreedySearch()
+	#oneClassSVMexps.testAndDrawCurves()
+	learning_range = np.arange(0.1, 1.2, 0.1)
+	estimators_range = np.arange(100, 300, 10)
+	depth_range = np.arange(1, 6, 1)
 	gradientBoostingexps = Experiments('Gradient-Boosting', percentiles_range, estimators_range, \
 		depth_range, learning_range)
 	gradientBoostingexps.runGreedySearch()
