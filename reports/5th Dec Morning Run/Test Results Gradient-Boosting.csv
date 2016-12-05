@@ -1,0 +1,13 @@
+Best Features,60
+Best Kernel,100
+Best Gamma,4
+Best C,0.3
+Number of test examples,5000
+True Positives,1136
+True Negatives,442
+False Positives,94
+False Negatives,3328
+Accuracy,0.3156
+Precision,0.9235772357723577
+Recall,0.25448028673835127
+F1 Score,0.3990165086055497

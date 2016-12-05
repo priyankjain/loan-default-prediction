@@ -1,0 +1,13 @@
+Best Features,80
+Best Kernel,rbf
+Best Gamma,0.0016681005372
+Best C,1.38949549437
+Number of test examples,5000
+True Positives,2017
+True Negatives,385
+False Positives,151
+False Negatives,2447
+Accuracy,0.4804
+Precision,0.9303505535055351
+Recall,0.45183691756272404
+F1 Score,0.6082629674306393

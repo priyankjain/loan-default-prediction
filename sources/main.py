@@ -150,11 +150,14 @@ class Experiments(object):
 				self.bestGamma = gamma
 		gamma = 'Kernel Coefficient'
 		xlabel = gamma
+		gamma_range = self.gamma_range
+		if self.classifierType=='Binary-SVM' or self.classifierType == 'One-Class-SVM':
+			gamma_range = np.log(self.gamma_range)
 		if self.classifierType == 'Gradient-Boosting':
 			gamma = 'Maximum depth of individual estimators'
 			xlabel = gamma
 		plotter.plotAndSaveErrorBar('{} validation curve for {}'.format(gamma, self.classifierType), \
-			self.gamma_range, means, stds, xlabel, 'Accuracy')
+			gamma_range, means, stds, xlabel, 'Accuracy')
 
 	def selectBestC(self, percentile, kernel, gamma):
 		means = list()
@@ -171,9 +174,11 @@ class Experiments(object):
 				self.bestC = C
 		regName = None
 		xlabel = None
+		C_range = self.C_range
 		if self.classifierType == 'Binary-SVM':
 			regName = 'Regularization parameter'
 			xlabel = regName + ' (C)'
+			C_range = np.log(C_range)
 		elif self.classifierType == 'One-Class-SVM':
 			regName = 'Regularization parameter'
 			xlabel = regName + ' (nu)'
@@ -181,7 +186,7 @@ class Experiments(object):
 			regName = 'Learning rate'
 			xlabel = 'Learning rate'
 		plotter.plotAndSaveErrorBar('Regularization parameter validation curve for {}'.format(self.classifierType),\
-			self.C_range, means, stds, xlabel, 'Accuracy')
+			C_range, means, stds, xlabel, 'Accuracy')
 
 	def runGreedySearch(self):
 		self.selectBestPercentile()
@@ -231,10 +236,18 @@ class Experiments(object):
 		f1_score = 2*precision*recall/(precision+recall)
 		with open(os.path.join(CHARTS_FOLDER, 'Test Results {}.csv'.format(self.classifierType)), 'w') as fout:
 			fout = csv.writer(fout)
-			fout.writerow(['Best Features', self.bestPercentile])
-			fout.writerow(['Best Kernel', self.bestKernel])
-			fout.writerow(['Best Gamma', self.bestGamma])
-			fout.writerow(['Best C', self.bestC])
+			if self.classifierType=='Binary-SVM' or self.classifierType=='One-Class-SVM':
+				kernel = 'kernel'
+				coeff = 'kernel coefficient'
+				C = 'regularization parameter'
+			elif self.classifierType=='Gradient-Boosting':
+				kernel = 'number of estimators'
+				coeff = 'maximum depth of individual estimators'
+				C = 'learning rate'
+			fout.writerow(['Best Percentile of correlated features (with respect to label)', self.bestPercentile])
+			fout.writerow(['Best {}'.format(kernel), self.bestKernel])
+			fout.writerow(['Best {}'.format(coeff), self.bestGamma])
+			fout.writerow(['Best {}'.format(C), self.bestC])
 			fout.writerow(['Number of test examples', total_predictions])
 			fout.writerow(['True Positives', true_positives])
 			fout.writerow(['True Negatives', true_negatives])
@@ -244,11 +257,14 @@ class Experiments(object):
 			fout.writerow(['Precision', precision])
 			fout.writerow(['Recall', recall])
 			fout.writerow(['F1 Score', f1_score])
+			fout.writerow(['Area under ROC curve', roc_auc])
+		'''
 		if self.classifierType == 'Binary-SVM' or self.classifierType == 'Gradient-Boosting':
 			self.X_train, self.y_train = self.dataSource.getTrainData(20000, 50)
 		elif self.classifierType == 'One-Class-SVM':
 			self.X_train, self.y_train = self.dataSource.getTrainData(20000, 0)
-		trainSize_range = [20, 50, 100, 200, 500, 1000, 2000, 5000, 7000, 9000, 12000, 15000, 20000]
+
+		trainSize_range = [20, 50, 100, 200, 500, 1000, 2000, 4000, 5000, 7000, 9000, 11000, 12000]
 		training_accuracies = list()
 		testing_accuracies = list()
 		for trainSize in trainSize_range:
@@ -284,7 +300,6 @@ class Experiments(object):
 			testing_accuracy /= total_predictions
 			training_accuracies.append(training_accuracy)
 			testing_accuracies.append(testing_accuracy)
-		'''
 		print(self.y_train)
 		train_sizes, train_scores, test_scores = learning_curve(\
 			classifier, np.array(self.X_train), np.array(self.y_train), cv=5, train_sizes = np.arange(0.1, 1.1, .1))
@@ -304,10 +319,10 @@ class Experiments(object):
 	             label="Cross-validation score")
 		plt.legend(loc="best")	
 		plt.savefig('Bias-Variance.pdf')
-		'''
 		plotter.drawBiasVarianceCurve('Bias-Variance-Curve for {}'.format(self.classifierType),\
 			trainSize_range, [x*100 for x in training_accuracies], [x*100 for x in testing_accuracies], \
 			'Number of training examples', 'Training Score', 'Testing Score')
+		'''
 
 	def runGridSearch(self):
 		CVresults = list()
@@ -455,10 +470,10 @@ class Experiments(object):
 
 if __name__ == '__main__':
 	os.chdir(HOME_FOLDER)
-	C_range = np.logspace(-2, 0.5, 8)
-	percentiles_range = (10, 15, 20, 30, 40, 50, 60, 70, 80, 100)
+	C_range = np.logspace(-2, 0.5, 6)
+	percentiles_range = (10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
 	kernels_range = ['poly', 'rbf', 'sigmoid']
-	gamma_range = np.logspace(-9, -1, 10)
+	gamma_range = np.logspace(-9, -1, 7)
 	binarySVMexps = Experiments('Binary-SVM', percentiles_range, kernels_range, gamma_range, C_range)
 	binarySVMexps.runGreedySearch()
 	binarySVMexps.testAndDrawCurves()
