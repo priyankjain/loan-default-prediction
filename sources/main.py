@@ -148,13 +148,13 @@ class Experiments(object):
 			if bestMean is None or mean > bestMean:
 				bestMean = mean
 				self.bestGamma = gamma
-		gamma = 'Kernel Coefficient'
+		gamma = 'Log of kernel coefficient'
 		xlabel = gamma
 		gamma_range = self.gamma_range
 		if self.classifierType=='Binary-SVM' or self.classifierType == 'One-Class-SVM':
 			gamma_range = np.log(self.gamma_range)
 		if self.classifierType == 'Gradient-Boosting':
-			gamma = 'Maximum depth of individual estimators'
+			gamma = 'Maximum depth of individual estimators'			
 			xlabel = gamma
 		plotter.plotAndSaveErrorBar('{} validation curve for {}'.format(gamma, self.classifierType), \
 			gamma_range, means, stds, xlabel, 'Accuracy')
@@ -176,7 +176,7 @@ class Experiments(object):
 		xlabel = None
 		C_range = self.C_range
 		if self.classifierType == 'Binary-SVM':
-			regName = 'Regularization parameter'
+			regName = 'Log of regularization parameter'
 			xlabel = regName + ' (C)'
 			C_range = np.log(C_range)
 		elif self.classifierType == 'One-Class-SVM':
@@ -481,9 +481,9 @@ if __name__ == '__main__':
 	oneClassSVMexps = Experiments('One-Class-SVM', percentiles_range, kernels_range, gamma_range, nu_range)
 	oneClassSVMexps.runGreedySearch()
 	oneClassSVMexps.testAndDrawCurves()
-	learning_range = np.arange(0.1, 1, 0.1)
-	estimators_range = np.arange(100, 130, 10)
-	depth_range = np.arange(1, 5, 1)
+	learning_range = np.arange(0.1, 1.2, 0.1)
+	estimators_range = np.arange(100, 300, 10)
+	depth_range = np.arange(1, 6, 1)
 	gradientBoostingexps = Experiments('Gradient-Boosting', percentiles_range, estimators_range, \
 		depth_range, learning_range)
 	gradientBoostingexps.runGreedySearch()

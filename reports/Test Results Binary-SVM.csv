@@ -1,0 +1,14 @@
+Best Percentile of correlated features (with respect to label),70
+Best kernel,rbf
+Best kernel coefficient,0.00464158883361
+Best regularization parameter,3.16227766017
+Number of test examples,5000
+True Positives,1748
+True Negatives,401
+False Positives,135
+False Negatives,2716
+Accuracy,0.4298
+Precision,0.9283058948486458
+Recall,0.39157706093189965
+F1 Score,0.55081140696392
+Area under ROC curve,0.576464535521

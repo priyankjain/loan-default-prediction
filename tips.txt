@@ -1,3 +1,0 @@
-Randomly select data and have seperate cross 
-For tuning the parameters - Grid search - Python scikit learn
-Bias variance curve - training and testing error

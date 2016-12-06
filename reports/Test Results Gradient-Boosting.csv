@@ -1,0 +1,14 @@
+Best Percentile of correlated features (with respect to label),50
+Best number of estimators,280
+Best maximum depth of individual estimators,4
+Best learning rate,0.2
+Number of test examples,5000
+True Positives,1059
+True Negatives,458
+False Positives,78
+False Negatives,3405
+Accuracy,0.3034
+Precision,0.9313984168865436
+Recall,0.23723118279569894
+F1 Score,0.37814675950723087
+Area under ROC curve,0.576629620714
