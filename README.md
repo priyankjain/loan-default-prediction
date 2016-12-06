@@ -13,8 +13,8 @@ scikit-learn==0.18
 matplotlib==1.5.1
 ```
 
-Running The Experiments:
-```
+###Running The Experiments:
+```shell
 cd sources/
 python analysis.py
 python main.py
